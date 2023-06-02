@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{createContext} from 'react'
+import Child1 from './components/Child1'
 
-function App() {
+
+/*
+//Props drilling problem
+
+export default function App() {
+
+  const name = "Afzal"
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Child1 value={name}/>
     </div>
-  );
+  )
 }
+*/
 
+
+
+// solution of props drilling problem (context api)
+
+const data1 = createContext() ;
+const data2 = createContext();
+function App() {
+  const name = "Afzal"
+  const gender ="Male"
+
+  return (
+    <div>
+      <data1.Provider value={name}>
+        <data2.Provider value={gender}>
+           <Child1 />
+        </data2.Provider>
+      </data1.Provider>
+    </div>
+  )
+}
 export default App;
+export {data1,data2};
+
